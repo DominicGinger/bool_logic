@@ -2,12 +2,6 @@
 (and #t #f)
 (not #t)
 
-;; things to define:
-;; xor
-;; nand
-;; half adder
-;; full adder
-
 (define (nand a b)
   (not (and (and a b) (and a #t))))
 (define (xor a b)
@@ -48,13 +42,14 @@
 
 (four-bit-adder (list #t #f #t #f) (list #f #t #f #t))
 
-(define (bit-adder a b result)
-  (if (> (length result) (length a))
-    result
-    (if (= (length result) 0)
-      (bit-adder a b (list result (full-adder (list-ref a (- (length a) (length result) 1)) (list-ref b (- (length b) (length result) 1)) #f)))
-      (bit-adder a b (list result (full-adder (list-ref a (- (length a) (length result) 1)) (list-ref b (- (length b) (length result) 1)) (last result)))))))
-
-(bit-adder (list #t #f #t #f) (list #f #t #f #t) (list))
-
+;; n bit adder
+(define (bit-adder a b)
+  (define (bit-adder-iter a b c)
+    (if (= (length a) 0)
+      (list)
+      (let ([x (full-adder (car a) (car b) c)])
+        (cons (car x)
+              (bit-adder-iter (cdr a) (cdr b) (last x))))))
+  (bit-adder-iter (reverse a) (reverse b) #f))
+(bit-adder (list #t #f #t #f #t) (list #f #t #f #t #f))
 
