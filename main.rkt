@@ -50,21 +50,37 @@
 
 ;; n bit adder
 (define (bit-adder a b)
+  (define (pad x n)
+    (if (< n 1)
+      x 
+      (append (build-list n (const 0)) x)))
+
+  (define (pad-list a b)
+    (let ([length-diff (- (length a) (length b))])
+    (values (cons 0 (pad a (- length-diff)))
+            (cons 0 (pad b length-diff)))))
+
   (define (bit-adder-iter a b c)
     (if (= (length a) 0)
       (list)
       (let ([x (full-adder (car a) (car b) c)])
         (cons (car x) (bit-adder-iter (cdr a) (cdr b) (last x))))))
-  (let ([result (reverse (bit-adder-iter (reverse (cons 0 a)) (reverse (cons 0 b)) 0))])
-                (if (= (car result) 0)
-                  (cdr result)
-                  (values result))))
-(bit-adder (list 1 0 1 0 1) (list 0 1 0 1 0))
 
-(bit-adder (list 0 1) (list 0 1))
-(four-bit-adder (list 0 0 0 1) (list 0 0 0 1))
-(bit-adder (list 0 0 0 1) (list 0 0 0 1))
+  (define (un-pad x)
+    (if (= (car x) 0)
+      (un-pad (cdr x))
+      x))
 
-(bit-adder (list 0 1 1 0 1 0 1) (list 0 0 0 1 1 0 0)) ; 53 + 12
-(bit-adder (list 1 1 0 0 1 0 0) (list 0 1 1 0 0 1 0)) ; 100 + 50
+  (let*-values ([(a b) (pad-list a b)]
+                [(result) (reverse (bit-adder-iter (reverse a) (reverse b) 0))])
+               (un-pad result)))
 
+(bit-adder '(1 0 1 0 1) '(0 1 0 1 0)) ; 21 + 10
+(bit-adder '(0 1) '(0 1)) ; 1 + 1
+(bit-adder '(0 0 0 1) '(0 0 0 1)) ; 1 + 1
+(bit-adder '(0 1 1 0 1 0 1) '(0 0 0 1 1 0 0)) ; 53 + 12
+(bit-adder '(1 1 0 0 1 0 0) '(0 1 1 0 0 1 0)) ; 100 + 50
+(bit-adder '(1 1 1 1 1 1 1) '(1 1 1 1 1 1 1)) ; 128 + 128
+(bit-adder '(1) '(1 1)) ; 1 + 3
+(bit-adder '(1 0 0 1) '(1 1)) ; 9 + 3
+(bit-adder '(1 1 1 1 1 1 1 1) '(1)) ; 255 + 1
