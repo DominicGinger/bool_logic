@@ -55,10 +55,16 @@
       (list)
       (let ([x (full-adder (car a) (car b) c)])
         (cons (car x) (bit-adder-iter (cdr a) (cdr b) (last x))))))
-  (reverse (bit-adder-iter (reverse a) (reverse b) 0)))
+  (let ([result (reverse (bit-adder-iter (reverse (cons 0 a)) (reverse (cons 0 b)) 0))])
+                (if (= (car result) 0)
+                  (cdr result)
+                  (values result))))
 (bit-adder (list 1 0 1 0 1) (list 0 1 0 1 0))
 
 (bit-adder (list 0 1) (list 0 1))
 (four-bit-adder (list 0 0 0 1) (list 0 0 0 1))
 (bit-adder (list 0 0 0 1) (list 0 0 0 1))
+
+(bit-adder (list 0 1 1 0 1 0 1) (list 0 0 0 1 1 0 0)) ; 53 + 12
+(bit-adder (list 1 1 0 0 1 0 0) (list 0 1 1 0 0 1 0)) ; 100 + 50
 
