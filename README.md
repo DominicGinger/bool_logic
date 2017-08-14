@@ -68,7 +68,11 @@ c-in --------------+
 
 
 #### n-bit-adder (ripple carry adder)
-`(n-bit-adder '(1 0 1 0 1) '(0 1 0 1 0)) ; '(1 1 1 1 1) 21 + 10 = 31`
-`(n-bit-adder '(1 0 1 1 1) '(1)) ; '(1 1 0 0 0) 23 + 1 = 24`
+```
+(n-bit-adder '(1 0 1 0 1) '(0 1 0 1 0)) ; '(1 1 1 1 1) 21 + 10 = 31
+```
+```
+(n-bit-adder '(1 0 1 1 1) '(1)) ; '(1 1 0 0 0) 23 + 1 = 24
+```
 
 Adds any two lists of 1's and 0's together.
