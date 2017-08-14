@@ -8,13 +8,13 @@
 (define (bit-or a b)
   (if (or (= a 1) (= b 1)) 1 0))
 
-(define (nand a b)
+(define (bit-nand a b)
   (bit-not (bit-and a b)))
-(define (xor a b)
-  (bit-and (bit-or a b) (nand a b)))
+(define (bit-xor a b)
+  (bit-and (bit-or a b) (bit-nand a b)))
 
 (define (half-adder a b)
-  (list (xor a b) (bit-and a b)))
+  (list (bit-xor a b) (bit-and a b)))
 
 (define (full-adder a b c-in)
   (let* ((h1 (half-adder a b))
@@ -53,8 +53,8 @@
   bit-not
   bit-and
   bit-or
-  nand
-  xor
+  bit-nand
+  bit-xor
   half-adder
   full-adder
   n-bit-adder)

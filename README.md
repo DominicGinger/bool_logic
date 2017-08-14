@@ -10,11 +10,11 @@ Basic circuit logic in racket. From or and and gates through to a ripple carry a
 #### bit-or
 `(bit-or 1 0) ; 1`
 
-#### nand
-`(nand 1 1) ; 0`
+#### bit-nand
+`(bit-nand 1 1) ; 0`
 
-#### xor
-`(xor 1 0) ; 1`
+#### bit-xor
+`(bit-xor 1 0) ; 1`
 
 #### half-adder
 `(half-adder 1 0) ; '(1 0)`

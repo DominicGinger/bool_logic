@@ -22,15 +22,15 @@
              (test-eqv? "bit-or-0-1" (bit-or 0 1) 1)
              (test-eqv? "bit-or-0-0" (bit-or 0 0) 0)
 
-             (test-eqv? "nand-1-1" (nand 1 1) 0)
-             (test-eqv? "nand-1-0" (nand 1 0) 1)
-             (test-eqv? "nand-0-1" (nand 0 1) 1)
-             (test-eqv? "nand-0-0" (nand 0 0) 1)
+             (test-eqv? "bit-nand-1-1" (bit-nand 1 1) 0)
+             (test-eqv? "bit-nand-1-0" (bit-nand 1 0) 1)
+             (test-eqv? "bit-nand-0-1" (bit-nand 0 1) 1)
+             (test-eqv? "bit-nand-0-0" (bit-nand 0 0) 1)
 
-             (test-eqv? "xor-1-1" (xor 1 1) 0)
-             (test-eqv? "xor-0-1" (xor 1 0) 1)
-             (test-eqv? "xor-1-0" (xor 0 1) 1)
-             (test-eqv? "xor-0-0" (xor 0 0) 0)
+             (test-eqv? "bit-xor-1-1" (bit-xor 1 1) 0)
+             (test-eqv? "bit-xor-0-1" (bit-xor 1 0) 1)
+             (test-eqv? "bit-xor-1-0" (bit-xor 0 1) 1)
+             (test-eqv? "bit-xor-0-0" (bit-xor 0 0) 0)
 
              (test-equal? "half-adder-1-1" (half-adder 1 1) '(0 1))
              (test-equal? "half-adder-1-0" (half-adder 1 0) '(1 0))
