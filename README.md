@@ -33,14 +33,12 @@ Basic circuit logic in racket. From or and and gates through to a ripple carry a
          +--|___,-'
 ```
 
-|---+---+---+---|
 | a | b | s | c |
-|---+---+---+---|
+| ------------- |
 | 1 | 1 | 0 | 1 |
 | 1 | 0 | 1 | 0 |
 | 0 | 1 | 1 | 0 |
 | 0 | 0 | 0 | 0 |
-|---+---+---+---|
 
 #### full-adder
 `(full-adder 1 0 1) ; '(0 1)`
@@ -56,9 +54,9 @@ Basic circuit logic in racket. From or and and gates through to a ripple carry a
 c-in --------------+
 ```
 
-|---+---+------+---+-------|
+
 | a | b | c-in | s | c-out |
-|---+---+------+---+-------|
+| ------------------------ |
 | 1 | 1 | 1    | 1 | 1     |
 | 1 | 1 | 0    | 0 | 1     |
 | 1 | 0 | 1    | 0 | 1     |
@@ -67,7 +65,7 @@ c-in --------------+
 | 0 | 0 | 1    | 1 | 0     |
 | 0 | 1 | 0    | 1 | 0     |
 | 0 | 0 | 0    | 0 | 0     |
-|---+---+------+---+-------|
+
 
 #### n-bit-adder (ripple carry adder)
 `(n-bit-adder '(1 0 1 0 1) '(0 1 0 1 0)) ; '(1 1 1 1 1) 21 + 10 = 31`
